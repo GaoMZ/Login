@@ -12,16 +12,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,12 +37,18 @@ private Button login;
 private	Button register;
 private	EditText etusername;
 private	EditText etpassword;
+private CheckBox checkBox;
 private	String username;
 private	String password;
 private	ProgressDialog p;
 
 private String url;
 private static String result=null;//从服务器端获取json数据
+/*
+ * 存储数据
+ */
+SharedPreferences preferences;
+Editor editor;
 
 
 	@Override
@@ -49,6 +59,21 @@ private static String result=null;//从服务器端获取json数据
 		init();
 		register.setOnClickListener((OnClickListener) new RegisterOnclick());
 		login.setOnClickListener(new LoginOnclick());
+		saveInf();
+	}
+	private void saveInf() {
+		// TODO Auto-generated method stub
+	//	SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+		 preferences=getSharedPreferences("userInfo", MODE_PRIVATE);
+		 editor=preferences.edit();
+		 username=preferences.getString("userName", "");
+		if(username==null){
+			checkBox.setChecked(false);		
+		}
+		else {
+			checkBox.setChecked(true);
+			etusername.setText(username);
+		}
 	}
 	private void init() 
 	{
@@ -59,6 +84,7 @@ private static String result=null;//从服务器端获取json数据
 		p=new ProgressDialog(LoginActivity.this);
 		p.setTitle("登录中");
 		p.setMessage("登录中，马上就好");
+		checkBox=(CheckBox) findViewById(R.id.chkSaveName);
 	}
 	private class RegisterOnclick implements OnClickListener
 	{
@@ -97,7 +123,7 @@ private static String result=null;//从服务器端获取json数据
 			p.show();
 			new Thread(new Runnable() {
 				public void run() {
-					url="http://10.211.133.56:8080/NJUPT_STITP_Server/user/login?user.username="
+					url="http://10.1.63.21:8080/NJUPT_STITP_Server/user/login?user.username="
 						+username/*getText()*/.toString()+"&user.password="+password/*.getText()*/.toString();
 					String str=doHttpClientGet();
 					int i=getLoginResult(str);
@@ -116,6 +142,18 @@ private static String result=null;//从服务器端获取json数据
 			String string = null;
 			if(i==0){
 				string="登录成功!";
+				/*
+				 * 判断是否存储用户名和密码
+				 */
+				if(checkBox.isChecked()){
+					editor.putString("userName", username);
+					editor.putString("passWord", password);
+					editor.commit();
+				}else{
+					editor.remove("userName");
+					editor.remove("passWord");
+					editor.commit();					
+				}
 				Toast.makeText(LoginActivity.this, string, Toast.LENGTH_LONG).show();
 				Intent intent=new Intent(LoginActivity.this,Function.class);
 				startActivity(intent);
@@ -133,9 +171,8 @@ private static String result=null;//从服务器端获取json数据
 		}	
 	};
 	
-	
+
 	private  String doHttpClientGet() {
-		// TODO Auto-generated method stub
 		
 		HttpGet httpGet=new HttpGet(url);
 		HttpClient client=new DefaultHttpClient();

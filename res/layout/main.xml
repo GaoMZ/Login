@@ -63,5 +63,12 @@
             android:layout_height="wrap_content"
             android:text="注册" />
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/chkSaveName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存用户名" />
+
        </LinearLayout>
 
