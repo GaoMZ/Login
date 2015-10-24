@@ -5,14 +5,14 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/commons-beanutils.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/commons-collections-3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/commons-lang-2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/commons-logging.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/ezmorph-1.0.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/json-lib-1.1-jdk13.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/迅雷下载/lib/xom-1.0d10.jar"/>
 	<classpathentry kind="lib" path="/NJUPT_STITP_Android/android-support-v4.jar"/>
 	<classpathentry exported="true" kind="lib" path="E:/jar/servlet-api.jar"/>
+	<classpathentry kind="lib" path="libs/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="libs/commons-collections-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging.jar"/>
+	<classpathentry kind="lib" path="libs/ezmorph-1.0.2.jar"/>
+	<classpathentry kind="lib" path="libs/json-lib-1.1-jdk13.jar"/>
+	<classpathentry kind="lib" path="libs/xom-1.0d10.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

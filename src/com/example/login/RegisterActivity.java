@@ -94,7 +94,7 @@ import android.widget.Toast;
 			new Thread(new Runnable() {
 
 				public void run() {
-					url="http://10.211.135.72:8080/NJUPT_STITP_Server/user/register?user.username="
+					url="http://10.211.133.56:8080/NJUPT_STITP_Server/user/register?user.username="
 							+username/*.getText()*/.toString()+"&user.password="+password/*.getText()*/.toString();
 					String str=doHttpClientGet();
 					int i=getRegistResult(str);

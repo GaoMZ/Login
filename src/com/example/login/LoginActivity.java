@@ -96,12 +96,11 @@ private static String result=null;//从服务器端获取json数据
 			}
 			p.show();
 			new Thread(new Runnable() {
-
 				public void run() {
-					url="http://10.211.135.72:8080/NJUPT_STITP_Server/user/login?user.username="
-							+username/*.getText()*/.toString()+"&user.password="+password/*.getText()*/.toString();
+					url="http://10.211.133.56:8080/NJUPT_STITP_Server/user/login?user.username="
+						+username/*getText()*/.toString()+"&user.password="+password/*.getText()*/.toString();
 					String str=doHttpClientGet();
-					int i=getRegistResult(str);
+					int i=getLoginResult(str);
 					Message msg=new Message();
 					msg.obj=i;
 					handler.sendMessage(msg);
@@ -133,6 +132,8 @@ private static String result=null;//从服务器端获取json数据
 			super.handleMessage(msg);
 		}	
 	};
+	
+	
 	private  String doHttpClientGet() {
 		// TODO Auto-generated method stub
 		
@@ -140,10 +141,10 @@ private static String result=null;//从服务器端获取json数据
 		HttpClient client=new DefaultHttpClient();
 		try {
 			HttpResponse response=client.execute(httpGet);
+			
 			if(response.getStatusLine().getStatusCode()==HttpStatus.SC_OK){
 				result=EntityUtils.toString(response.getEntity());	
 				}
-				
 				System.out.println("content----->"+result);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -154,7 +155,7 @@ private static String result=null;//从服务器端获取json数据
 		return result;
 	}	
 	
-	public  int getRegistResult(String jsonString){
+	public  int getLoginResult(String jsonString){
 		JSONObject resultCode = new JSONObject().fromString(jsonString);
 		return resultCode.getInt("result_code");
 	}
